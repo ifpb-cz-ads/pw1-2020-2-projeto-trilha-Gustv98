@@ -7,6 +7,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    HELLO WORLD!
+    {% for evento in eventos %}
+      <b>FILMES</b>
+        <div class="col">
+            <img class="img-thumbnail" src="{{evento.image.url}}">
+                
+        </div>
+    {% endfor %}
 </body>
 </html>
