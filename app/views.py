@@ -8,3 +8,6 @@ def index_page(request):
     dados = {'eventos' :evento}
     return render(request, 'index.html', dados)
 
+def favoritos(request):
+    return render(request, 'favoritos.html')
+
