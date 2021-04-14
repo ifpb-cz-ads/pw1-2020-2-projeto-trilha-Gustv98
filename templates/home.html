@@ -12,18 +12,18 @@
 
 
 <body>
-    <form action="/favoritos/" submit="POST">
-        <div class="row">
-            {% for evento in eventos %}
-                <div class="col-lg-4">
-                        <div class="box-element filmes">
-                            <img class="img-thumbnail" src="{{evento.image.url}}" alt="First-slide">
-                            <button data-filmes={{evento.titulo}} data-action="add" class="btn btn-outline-secondary add-btn update-favorites">Favoritos</button>     
-                        </div>
-                </div>
-            {% endfor %}
-        </div>
-    </form>
+    <div class="row">
+            <div class="col-lg-4">
+                    <div class="box-element filmes">
+                        {% if user.is_authenticated %}
+                        Usuário Logado: {{user.username}} - 
+                        {% endif %}
+                        <br>
+            
+                    </div>
+            </div> 
+    </div>
     <script type="text/javascript" src="{% static 'js/favoritos.js' %}"></script>
+
 </body>
 </html>
