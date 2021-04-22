@@ -14,6 +14,31 @@ class HomeView(ListView):
     model = Filmes
     template_name = 'home.html'
 
+def lista_favoritos(request):
+    usuario = request.user
+    filme = Filmes.objects.filter(usuario=usuario)
+    dados = {'filmes': filme}
+    return render(request, 'favoritos.html', dados)
+
+def user_logout(request):
+    logout(request)
+    return redirect('/login/')
+
+def user_login(request):
+    return render(request, 'login.html')
+
+def submit_login(request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        usuario = authenticate(username=username, password=password)
+        if usuario is not None:
+            login(request, usuario)
+            return redirect('/')
+        else:
+            messages.error(request, "Usuário ou senha inválido")
+    return redirect('/login/')
+
 
 @login_required(login_url='/login/')
 def submitUserFavorites(request):
@@ -41,34 +66,18 @@ def submitUserFavorites(request):
             
     return render(request, 'add_favorito.html')
 
-def user_login(request):
-    return render(request, 'login.html')
-
 @login_required(login_url='login/')
 def user_favorites(request):
     return render(request, 'add_favorito.html')
 
 
-def lista_favoritos(request):
+
+
+@login_required(login_url='login/')
+def delete_filme(request, id_filme):
     usuario = request.user
-    filme = Filmes.objects.filter(usuario=usuario)
-    dados = {'filmes': filme}
-    return render(request, 'favoritos.html', dados)
-
-def user_logout(request):
-    logout(request)
-    return redirect('/login/')
-
-def submit_login(request):
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        usuario = authenticate(username=username, password=password)
-        if usuario is not None:
-            login(request, usuario)
-            return redirect('/')
-        else:
-            messages.error(request, "Usuário ou senha inválido")
-    return redirect('/login/')
-
+    filme = Filmes.objects.get(id=id_filme)
+    if usuario == filme.usuario:
+        filme.delete()
+    return redirect('favoritos')
 

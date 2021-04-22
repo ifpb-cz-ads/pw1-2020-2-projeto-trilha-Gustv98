@@ -12,8 +12,7 @@ class Filmes(models.Model):
     generos = models.CharField(max_length=80)
     duracao = models.CharField(max_length=30)
     diretor = models.CharField(max_length=50, null=True)
-    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    favorite = models.ManyToManyField(User, related_name='filmes_favoritos', blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.titulo

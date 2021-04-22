@@ -3,7 +3,8 @@ from .models import Filmes
 # Register your models here.
 
 class EventoAdmin(admin.ModelAdmin):
-    list_filter = ('usuario')
+    list_display = ('id', 'titulo',) 
+    list_filter = ('usuario',)
 
-admin.site.register(Filmes)
+admin.site.register(Filmes, EventoAdmin)
 
