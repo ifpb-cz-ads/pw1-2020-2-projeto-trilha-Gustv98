@@ -68,7 +68,11 @@ def submitUserFavorites(request):
 
 @login_required(login_url='login/')
 def user_favorites(request):
-    return render(request, 'add_favorito.html')
+    id_filme = request.GET.get('id')
+    dados = {}
+    if id_filme:
+        dados['filmes'] = Filmes.objects.get(id=id_filme)
+    return render(request, 'add_favorito.html', dados)
 
 
 
