@@ -15,6 +15,7 @@
 	<!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
     {% include "navbar.html" %}
+    {% include "sidemenu.html" %}  
 </head>
 <body>
     <div class="container">
@@ -67,7 +68,7 @@
                         </div>
                         {% if user.is_authenticated %}
                         <div class="form-group">
-                            <button type="submit" value="Salvar" class="btn float-right login_btn" placeholder="Salvar">
+                            <button type="submit" value="Salvar" class="btn float-right login_btn" placeholder="Salvar">Salvar</button>
                         </div>
                         {% endif %}
                     </form>
