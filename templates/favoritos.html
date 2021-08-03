@@ -1,0 +1,24 @@
+{% include 'navbar.html' %}
+{% include "sidemenu.html" %}
+
+{% block content %}
+        {% for filme in filmes %}
+        <div class="row">
+                <div class="col-lg-4">
+                        <div class="box-element filmes">
+                                <ul>
+                                <li>Titulo: {{filme.titulo}}</li>
+                                <li>Duração: {{filme.duracao}}</li>
+                                <li>Direção: {{filme.diretor}}</li>
+                                <li>Gênero(s):{{filme.generos}}</li>
+                                <li>Sinopse: {{filme.sinopse}}</li>
+                                </ul>
+                                <a href="/addFavorito/?id={{ filme.id }}">Editar</a> /
+                                <a href="delete/{{ filme.id }}/">Excluir</a>
+                        </div>
+                </div>
+        </div>
+        
+        {% endfor %}
+
+{% endblock %}
